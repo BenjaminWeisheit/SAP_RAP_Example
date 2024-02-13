@@ -1,0 +1,11 @@
+@EndUserText.label: 'acl'
+@MappingRole: true
+define role ZX_R_SKILL {
+    grant
+        select
+            on
+                ZX_R_SKILL
+                    where
+                        inheriting conditions from entity ZX_i_SKILL;
+                        
+}

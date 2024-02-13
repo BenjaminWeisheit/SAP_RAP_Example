@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZX_C_PERSON alias Person
+{
+  use create;
+  use update;
+
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+
+  use association _Skill { create; with draft;}
+}
+
+define behavior for ZX_C_SKILL alias Skill
+{
+  use update;
+
+  use association _Person { with draft;}
+}

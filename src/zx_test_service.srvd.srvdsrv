@@ -1,0 +1,5 @@
+@EndUserText.label: 'Test'
+define service ZX_Test_Service {
+  expose ZX_C_PERSON as Person;
+  expose ZX_C_SKILL  as Skill;
+}

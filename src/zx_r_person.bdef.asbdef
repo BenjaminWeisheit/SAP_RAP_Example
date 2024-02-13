@@ -1,0 +1,68 @@
+managed implementation in class zbp_x_r_person unique;
+strict ( 2 );
+with draft;
+
+define behavior for zx_R_Person alias Person
+persistent table zti_tst_person
+draft table zti_tst_person_d
+authorization master ( instance )
+lock master total etag LastChangedAt
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _Skill { create; with draft; }
+
+  field ( readonly, numbering : managed ) Person;
+
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zti_tst_person corresponding
+    {
+      FirstName          = first_name;
+      LastName           = last_name;
+      PostalCode         = postal_code;
+      HouseNumber        = house_number;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LastChangedBy      = last_changed_by;
+      LastChangedAt      = last_changed_at;
+      LocalLastChangedAt = local_last_changed_at;
+      LocalLastChangedBy = local_last_changed_by;
+    }
+
+}
+
+define behavior for ZX_R_Skill alias Skill
+persistent table zti_tst_skill
+draft table zti_tst_skill_d
+lock dependent by _Person
+authorization dependent by _Person
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) Person;
+  association _Person { with draft; }
+
+  field ( readonly, numbering : managed ) Skill;
+
+  mapping for zti_tst_skill corresponding
+    {
+      ShortDescription   = short_description;
+      CertifictaionDate  = certifictaion_date;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LastChangedBy      = last_changed_by;
+      LastChangedAt      = last_changed_at;
+      LocalLastChangedAt = local_last_changed_at;
+      LocalLastChangedBy = local_last_changed_by;
+    }
+
+}

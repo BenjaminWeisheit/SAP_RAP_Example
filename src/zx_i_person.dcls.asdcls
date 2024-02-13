@@ -1,0 +1,9 @@
+@EndUserText.label: 'ACL'
+@MappingRole: true
+define role ZX_I_PERSON {
+    grant
+        select
+            on
+                ZX_I_PERSON; 
+                
+}
